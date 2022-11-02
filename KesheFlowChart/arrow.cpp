@@ -5,8 +5,9 @@
 #include<QPen>
 #include<QtMath>
 
-Arrow::Arrow(DiagramItem *startItem, DiagramItem *endItem, QGraphicsItem *parent)
-    :myStartItem(startItem),myEndItem(endItem),QGraphicsLineItem(parent)
+Arrow::Arrow(DiagramItem *startItem, DiagramItem *endItem,
+             QGraphicsSceneMouseEvent *mouseEvent,QGraphicsItem *parent)
+    :myStartItem(startItem),myEndItem(endItem),myMouseEvent(mouseEvent),QGraphicsLineItem(parent)
 {
     setFlag(QGraphicsItem::ItemIsSelectable,true);//select
     setPen(QPen(myColor,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));//参数
@@ -36,17 +37,17 @@ void Arrow::updatePosition()
     setLine(line);
 }
 
-void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *,QWidget *)
+void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *,QWidget *,QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (myStartItem->collidesWithItem(myEndItem))//重叠
         return;
 //连线状态的设置
     QPen myPen = pen();
     myPen.setColor(myColor);
-    qreal arrowSize = 20;
+    qreal arrowSize = 50;
     painter->setPen(myPen);
     painter->setBrush(myColor);
-
+    //
     QLineF centerLine(myStartItem->pos(), myEndItem->pos());//
     QPolygonF endPolygon = myEndItem->polygon();
     QPointF p1 = endPolygon.first() + myEndItem->pos();//点加上

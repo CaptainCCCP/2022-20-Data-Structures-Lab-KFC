@@ -155,7 +155,7 @@ void DiagramScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
             //在first这个点存在的图形抓取出来赋给startItem
             DiagramItem *endItem = qgraphicsitem_cast<DiagramItem *>(endItems.first());
 //change2 here we start to handle the problem
-            Arrow *arrow = new Arrow(startItem, endItem);//添加箭头
+            Arrow *arrow = new Arrow(startItem, endItem,mouseEvent);//添加箭头
             arrow->setColor(myLineColor);
             startItem->addArrow(arrow);
             endItem->addArrow(arrow);
