@@ -3,7 +3,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneContextMenuEvent>
 #include <QMenu>
+#include <QPointF>
 #include <QPainter>
+#include <QListIterator>
 DiagramItem::DiagramItem(DiagramType diagramType,
                          QMenu *myContextMenu,
                          QGraphicsItem *parent)
@@ -36,11 +38,14 @@ DiagramItem::DiagramItem(DiagramType diagramType,
                       << QPointF(100, 0) << QPointF(0, -50)
                       << QPointF(-100, 0);
             break;
-        case Step:
+        case Step:{
             myPolygon << QPointF(-100, -50) << QPointF(100, -50)
                       << QPointF(100, 50) << QPointF(-100, 50)
                       << QPointF(-100, -50);
-            break;
+            //
+                        QPointF a(0,50),b(0,-50),c(100,0),d(-100,0);
+                        this->points<<a<<b<<c<<d;
+            break;}
         case Io:
             myPolygon << QPointF(-120, -60) << QPointF(-70, 60)
                       << QPointF(120, 60) << QPointF(70, -60)
@@ -86,6 +91,27 @@ QPixmap DiagramItem::image() const
     painter.translate(125,125);
     painter.drawPolyline(myPolygon);
     return pixmap;
+}
+
+QPointF DiagramItem::nearPoint(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    //change2
+    QPointF mousePoint(mouseEvent->pos());
+    int minx = 11110;
+    int miny = 10000;
+    QListIterator <QPointF>i(points);
+    for(;i.hasNext();){
+        int temp1 = abs(i.next().x()-mousePoint.x());
+        if(temp1<minx){
+            minx = temp1;
+        }
+        int temp2 = abs(i.next().y()-mousePoint.y());
+        if(temp2<miny){
+            miny = temp2;
+        }
+    }
+    QPointF returnPoint(minx,miny);
+    return returnPoint;
 }
 
 void DiagramItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)

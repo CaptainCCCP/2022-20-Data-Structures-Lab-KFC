@@ -95,7 +95,7 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         break;
     }
     case InsertLine:
-        line = new QGraphicsLineItem(QLineF(mouseEvent->scenePos(),//协助可视线
+        line = new QGraphicsLineItem(QLineF(mouseEvent->scenePos(),//提示线
                                     mouseEvent->scenePos()));
         line->setPen(QPen(myLineColor, 2));
         addItem(line);
@@ -152,8 +152,9 @@ void DiagramScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
             startItems.first() != endItems.first()) {//不是同一个点
 
             DiagramItem *startItem = qgraphicsitem_cast<DiagramItem *>(startItems.first());
+            //在first这个点存在的图形抓取出来赋给startItem
             DiagramItem *endItem = qgraphicsitem_cast<DiagramItem *>(endItems.first());
-
+//change2 here we start to handle the problem
             Arrow *arrow = new Arrow(startItem, endItem);//添加箭头
             arrow->setColor(myLineColor);
             startItem->addArrow(arrow);

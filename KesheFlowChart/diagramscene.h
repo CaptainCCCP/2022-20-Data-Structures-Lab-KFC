@@ -60,7 +60,7 @@ public slots:
     void editorLostFocus(TextDiagramItem *item);//编辑时删除
 
 signals:
-    void itemInserted(DiagramItem *item);
+    void  itemInserted(DiagramItem *item);
     void textInserted(QGraphicsTextItem *item);
     void itemSelected(QGraphicsItem *item);
 };
