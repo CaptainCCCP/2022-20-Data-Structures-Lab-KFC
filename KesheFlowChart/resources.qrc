@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>background1.png</file>
+        <file>background2.png</file>
+        <file>background3.png</file>
+        <file>background4.png</file>
+        <file>bold.png</file>
+        <file>bringtofront.png</file>
+        <file>delete.png</file>
+        <file>floodfill.png</file>
+        <file>italic.png</file>
+        <file>KesheFlowChart.pro</file>
+        <file>linecolor.png</file>
+        <file>linepointer.png</file>
+        <file>pointer.png</file>
+        <file>sendtoback.png</file>
+        <file>textpointer.png</file>
+        <file>underline.png</file>
+    </qresource>
+</RCC>
