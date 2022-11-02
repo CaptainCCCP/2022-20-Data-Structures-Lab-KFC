@@ -21,8 +21,7 @@ public:
     void addArrow(Arrow *arrow);
     //
     QPixmap image()const;//图标
-    QPointF nearPoint(QGraphicsSceneMouseEvent *mouseEvent);
-    //change2 返回鼠标点击处最近的QPoint
+
 protected:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event)override;
     QVariant itemChange(GraphicsItemChange change, const QVariant &value)override;
@@ -33,7 +32,6 @@ private:
     QPolygonF myPolygon;//点连起来形成哪种形状
     QList<Arrow*>arrows;//保存的所有箭头指针
     QMenu *myContextMenu;// 右键弹出的菜单
-    QList<QPointF>points;//周边连接点//change1
 };
 
 #endif // DIAGRAMITEM_H

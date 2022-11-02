@@ -51,7 +51,7 @@ private slots:
     void sceneScaleChanged(const QString &scale);
     void handleFontChange();
 private:
-    static constexpr int InsertTextButton = 10;
+    static constexpr int InsertTextButton = 25;
     void createToolBox();
     void createActions();
     void createMenus();

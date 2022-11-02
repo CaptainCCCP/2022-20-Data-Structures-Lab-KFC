@@ -95,10 +95,12 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         break;
     }
     case InsertLine:
-        line = new QGraphicsLineItem(QLineF(mouseEvent->scenePos(),//提示线
+        line = new QGraphicsLineItem(QLineF(mouseEvent->scenePos(),//协助可视线
                                     mouseEvent->scenePos()));
         line->setPen(QPen(myLineColor, 2));
         addItem(line);
+        //next change3 加入点方向
+
         break;
     case InsertText:{
         TextDiagramItem *textItem = new TextDiagramItem();
@@ -127,6 +129,7 @@ void DiagramScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
     if (myMode == InsertLine && line != nullptr) {//已存在
         QLineF newLine(line->line().p1(), mouseEvent->scenePos());
         line->setLine(newLine);//这线会删
+
     } else if (myMode == MoveItem) {
         QGraphicsScene::mouseMoveEvent(mouseEvent);//qt提供的
     }
@@ -134,7 +137,7 @@ void DiagramScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 void DiagramScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
-    if (line != nullptr && myMode == InsertLine) {
+    if (line != nullptr && myMode == InsertLine)  {
         //已经画了
         QList<QGraphicsItem *> startItems = items(line->line().p1());
         if (startItems.count() && startItems.first() == line)
@@ -146,16 +149,15 @@ void DiagramScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
         removeItem(line);
         delete line;//删掉已有的线
 
-        if (startItems.count() > 0 && endItems.count() > 0 &&//确实有点可以连
-            startItems.first()->type() == DiagramItem::Type &&//不是叠着的
+        if (startItems.count() > 0 && endItems.count() > 0 &&//确实有图可以连
+            startItems.first()->type() == DiagramItem::Type &&
             endItems.first()->type() == DiagramItem::Type &&
             startItems.first() != endItems.first()) {//不是同一个点
 
             DiagramItem *startItem = qgraphicsitem_cast<DiagramItem *>(startItems.first());
-            //在first这个点存在的图形抓取出来赋给startItem
             DiagramItem *endItem = qgraphicsitem_cast<DiagramItem *>(endItems.first());
-//change2 here we start to handle the problem
-            Arrow *arrow = new Arrow(startItem, endItem,mouseEvent);//添加箭头
+
+            Arrow *arrow = new Arrow(startItem, endItem,nullptr);//添加箭头
             arrow->setColor(myLineColor);
             startItem->addArrow(arrow);
             endItem->addArrow(arrow);
