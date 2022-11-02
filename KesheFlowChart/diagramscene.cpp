@@ -6,7 +6,9 @@ DiagramScene::DiagramScene(QMenu *itemMenu, QObject *parent)
     :QGraphicsScene{parent},myItemMenu{itemMenu}
 {
     myMode = MoveItem;
+    myItemType = DiagramItem::Step;
     line = nullptr;
+    textItem = nullptr;
     myItemColor = Qt::white;
     myTextColor = Qt::black;
     myLineColor = Qt::black;
@@ -82,7 +84,7 @@ void DiagramScene::editorLostFocus(TextDiagramItem *item)
 void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (mouseEvent->button() != Qt::LeftButton)
-        return;//不是右键就退出
+        return;//不是左键就退出
     switch (myMode){//控制生命周期
     case InsertItem:{
         DiagramItem *item = new DiagramItem(myItemType, myItemMenu);
@@ -93,7 +95,7 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         break;
     }
     case InsertLine:
-        line = new QGraphicsLineItem(QLineF(mouseEvent->scenePos(),
+        line = new QGraphicsLineItem(QLineF(mouseEvent->scenePos(),//协助可视线
                                     mouseEvent->scenePos()));
         line->setPen(QPen(myLineColor, 2));
         addItem(line);
@@ -116,6 +118,7 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     default:
         ;
     }
+    QGraphicsScene::mousePressEvent(mouseEvent);
 
 }
 

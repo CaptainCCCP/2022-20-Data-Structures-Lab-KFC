@@ -7,7 +7,7 @@ class DiagramItem : public QGraphicsPolygonItem//QGraphicsItem-QAbstractGraphics
 public:
 
     enum{ Type = UserType+15 };//图形/箭头/
-    enum DiagramType{ Step,Conditional,StartEnd,Io };//
+    enum DiagramType{ Step,Conditional,StartEnd,Io,zhuShi };//
 
     DiagramItem(DiagramType diagramType,QMenu *myContextMenu,QGraphicsItem *parent = nullptr);
 

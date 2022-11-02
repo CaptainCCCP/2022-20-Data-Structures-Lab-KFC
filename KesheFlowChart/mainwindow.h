@@ -51,6 +51,7 @@ private slots:
     void sceneScaleChanged(const QString &scale);
     void handleFontChange();
 private:
+    static constexpr int InsertTextButton = 10;
     void createToolBox();
     void createActions();
     void createMenus();
@@ -61,7 +62,7 @@ private:
     QIcon createColorIcon(QColor color);
     //左侧group
     QWidget *createCellWidget(const QString &text,DiagramItem::DiagramType type);//item的
-    QWidget *createBackgroudCellWidget(const QString &text,const QString &image);//背景的
+    QWidget *createBackgroundCellWidget(const QString &text,const QString &image);//背景的
 
 private:
     QAction *exitAction;
