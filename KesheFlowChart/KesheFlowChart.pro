@@ -19,6 +19,13 @@ SOURCES += \
     arrow.cpp \
     diagramitem.cpp \
     diagramscene.cpp \
+    item/mybaseitem.cpp \
+    item/myconditional.cpp \
+    item/myellipse.cpp \
+    item/myinout.cpp \
+    item/myline.cpp \
+    item/mypoint.cpp \
+    item/myrect.cpp \
     main.cpp \
     mainwindow.cpp \
     textdiagramitem.cpp
@@ -27,6 +34,13 @@ HEADERS += \
     arrow.h \
     diagramitem.h \
     diagramscene.h \
+    item/mybaseitem.h \
+    item/myconditional.h \
+    item/myellipse.h \
+    item/myinout.h \
+    item/myline.h \
+    item/mypoint.h \
+    item/myrect.h \
     mainwindow.h \
     textdiagramitem.h
 

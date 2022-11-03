@@ -1,12 +1,14 @@
 #ifndef ARROW_H
 #define ARROW_H
 #include <QGraphicsLineItem>
+#include <QtMath>
+
 class DiagramItem;
 class Arrow : public QGraphicsLineItem
 {
 private:
     DiagramItem *myStartItem;
-    DiagramItem * myEndItem;//起点终点
+    DiagramItem * myEndItem;//起点终点图形
     QPolygonF arrowHead;
     QColor myColor = Qt::black;
     //
@@ -14,6 +16,9 @@ private:
     QPointF aPoint,thePoint;
     QList<QPointF> PointThrough;
 
+protected://间接调用
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+               QWidget *widget)override;
 public:
     enum{Type=UserType +4};
     Arrow(DiagramItem *startItem,DiagramItem *endItem,QGraphicsItem *parent = nullptr);
@@ -32,9 +37,6 @@ public:
     //判断出入方向
     int ReturnStartDirect();
     int ReturnEndDirect();
-protected://间接调用
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget)override;
 
 };
 
