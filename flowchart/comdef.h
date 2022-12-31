@@ -1,0 +1,32 @@
+﻿#ifndef COMDEF_H
+#define COMDEF_H
+enum class MOUSE_EVENT_TYPE {
+  NONE,
+  CREATING_CHANGE_SIZE,
+  RUNTIME_CHANGE_SIZE,
+  RUNTIME_CREATE_MAGPOINT,
+  RUNTIME_CHANGE_POS,
+};
+enum class ORIENTION {
+  NONE = 0,
+  NORTHWEST = 1,
+  NORTH,
+  NORTHEAST,
+  EAST,
+  SOUTHEAST,
+  SOUTH,
+  SOUTHWEST,
+  WEST,
+  STARTPOINT = 9,
+  ENDPOINT = 10,
+};
+enum class LINE_HEAD_TYPE { ARROW0 = 0, ARROW1, ARROW2, ARROW3 };
+enum class PaintChartType {
+  NONE,
+  RECT,
+  DIAMOND,
+  ROUNDRECT,
+  LINE,
+};
+
+#endif // COMDEF_H
